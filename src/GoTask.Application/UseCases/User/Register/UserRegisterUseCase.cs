@@ -21,7 +21,16 @@ namespace GoTask.Application.UseCases.User.Register
                 Password = request.Password
             };
 
+            var encodePass = await EncodePassword(user);
+
+            user.Password = encodePass;
+
             await _userRepository.Post(user);
+        }
+
+        private async Task<string> EncodePassword(Domain.Entities.User req)
+        {
+            return BCrypt.Net.BCrypt.HashPassword(req.Password);
         }
     }
 }

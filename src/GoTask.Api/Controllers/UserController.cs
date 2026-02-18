@@ -10,11 +10,19 @@ namespace GoTask.Api.Controllers
     {
 
         [HttpPost]
+        [Route("register")]
         public async Task<IActionResult> Register([FromBody] RequestRegisterUserJson request, [FromServices] IUserRegisterUseCase useCase)
         {
-            await useCase.Execute(request);
+            try
+            {
+                await useCase.Execute(request);
 
-            return Created(string.Empty, null);
+                return Created(string.Empty, null);
+            }
+            catch (ArgumentException err)
+            {
+                return BadRequest(err.Message);
+            }
         }
     }
 }

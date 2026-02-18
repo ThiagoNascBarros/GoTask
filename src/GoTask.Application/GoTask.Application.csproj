@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\GoTask.Communication\GoTask.Communication.csproj" />
     <ProjectReference Include="..\GoTask.Domain\GoTask.Domain.csproj" />
     <ProjectReference Include="..\GoTask.Exception\GoTask.Exception.csproj" />
