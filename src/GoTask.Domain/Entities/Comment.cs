@@ -5,6 +5,7 @@
 
         public long Id { get; set; }
         public string Body { get; set; } = string.Empty;
-        public Task Task { get; set; }
+        public long TaskId { get; set; }
+        public Task Task { get; set; } = default!;
     }
 }
