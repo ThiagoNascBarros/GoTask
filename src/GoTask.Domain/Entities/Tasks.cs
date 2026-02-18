@@ -1,6 +1,9 @@
-﻿namespace GoTask.Domain.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace GoTask.Domain.Entities
 {
-    public class Task
+    [Table("Task")]
+    public class Tasks
     {
         public long Id { get; set; }
         public string Title { get; set; } = string.Empty;
