@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/GoTask.Api/GoTask.Api.csproj" />
+    <Project Path="src/GoTask.Application/GoTask.Application.csproj" />
+    <Project Path="src/GoTask.Communication/GoTask.Communication.csproj" />
+    <Project Path="src/GoTask.Domain/GoTask.Domain.csproj" />
+    <Project Path="src/GoTask.Exception/GoTask.Exception.csproj" />
+    <Project Path="src/GoTask.Infra/GoTask.Infra.csproj" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="GoTask.Unit/GoTask.Unit.csproj" Id="33a65839-f35e-475e-a427-a99025bdf00d" />
+  </Folder>
+</Solution>
