@@ -6,4 +6,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GoTask.Communication\GoTask.Communication.csproj" />
+    <ProjectReference Include="..\GoTask.Domain\GoTask.Domain.csproj" />
+    <ProjectReference Include="..\GoTask.Exception\GoTask.Exception.csproj" />
+    <ProjectReference Include="..\GoTask.Infra\GoTask.Infra.csproj" />
+  </ItemGroup>
+
 </Project>
