@@ -1,5 +1,6 @@
 ﻿using GoTask.Application.UseCases.User.Register;
 using GoTask.Communication.Requests;
+using GoTask.Communication.Response;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GoTask.Api.Controllers
@@ -10,19 +11,13 @@ namespace GoTask.Api.Controllers
     {
 
         [HttpPost]
-        [Route("register")]
+        [ProducesResponseType(typeof(ResponseRegisteredUserJson), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ResponseErroJson), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Register([FromBody] RequestRegisterUserJson request, [FromServices] IUserRegisterUseCase useCase)
         {
-            try
-            {
-                await useCase.Execute(request);
+            var response = await useCase.Execute(request);
 
-                return Created(string.Empty, null);
-            }
-            catch (ArgumentException err)
-            {
-                return BadRequest(err.Message);
-            }
+            return Created(string.Empty, response);
         }
     }
 }

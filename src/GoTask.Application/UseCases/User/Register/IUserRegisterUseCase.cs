@@ -1,9 +1,10 @@
 ﻿using GoTask.Communication.Requests;
+using GoTask.Communication.Response;
 
 namespace GoTask.Application.UseCases.User.Register
 {
     public interface IUserRegisterUseCase
     {
-        System.Threading.Tasks.Task Execute(RequestRegisterUserJson request);
+        Task<ResponseRegisteredUserJson> Execute(RequestRegisterUserJson request);
     }
 }

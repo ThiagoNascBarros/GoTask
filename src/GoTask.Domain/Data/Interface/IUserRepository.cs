@@ -4,6 +4,6 @@ namespace GoTask.Domain.Data.Interface
 {
     public interface IUserRepository
     {
-        Task Post(User user);
+        Task<User> Post(User user);
     }
 }

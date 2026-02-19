@@ -1,3 +1,4 @@
+using GoTask.Api.Filter;
 using GoTask.Application;
 using GoTask.Infra;
 using GoTask.Infra.Migrations;
@@ -13,6 +14,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddHealthChecks();
 builder.Services.Injection(builder.Configuration);
 builder.Services.AddUseCases();
+builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionGlobalFilter)));
 
 var app = builder.Build();
 

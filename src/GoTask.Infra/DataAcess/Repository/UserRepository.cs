@@ -8,9 +8,10 @@ namespace GoTask.Infra.DataAcess.Repository
         private readonly GoTaskDbContext _dbContext;
         public UserRepository(GoTaskDbContext dbContext) => _dbContext = dbContext;
 
-        public async Task Post(User user)
+        public async Task<User> Post(User user)
         {
-            _dbContext.User.Add(user);
+            var userAdd = await _dbContext.User.AddAsync(user);
+            return userAdd.Entity;
         }
     }
 }

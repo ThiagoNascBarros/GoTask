@@ -8,6 +8,6 @@
     <Project Path="src/GoTask.Infra/GoTask.Infra.csproj" />
   </Folder>
   <Folder Name="/test/">
-    <Project Path="GoTask.Unit/GoTask.Unit.csproj" Id="33a65839-f35e-475e-a427-a99025bdf00d" />
+    <Project Path="test/GoTask.Unit/GoTask.Unit.csproj" Id="33a65839-f35e-475e-a427-a99025bdf00d" />
   </Folder>
 </Solution>

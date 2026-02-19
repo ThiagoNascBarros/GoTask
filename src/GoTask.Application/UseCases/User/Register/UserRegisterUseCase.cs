@@ -1,4 +1,5 @@
 ﻿using GoTask.Communication.Requests;
+using GoTask.Communication.Response;
 using GoTask.Domain.Data.Interface;
 
 namespace GoTask.Application.UseCases.User.Register
@@ -6,13 +7,15 @@ namespace GoTask.Application.UseCases.User.Register
     public class UserRegisterUseCase : IUserRegisterUseCase
     {
         private readonly IUserRepository _userRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public UserRegisterUseCase(IUserRepository userRepository)
+        public UserRegisterUseCase(IUserRepository userRepository, IUnitOfWork unitOfWork)
         {
             _userRepository = userRepository;
+            _unitOfWork = unitOfWork;
         }
 
-        public async System.Threading.Tasks.Task Execute(RequestRegisterUserJson request)
+        public async Task<ResponseRegisteredUserJson> Execute(RequestRegisterUserJson request)
         {
             var user = new Domain.Entities.User
             {
@@ -25,7 +28,14 @@ namespace GoTask.Application.UseCases.User.Register
 
             user.Password = encodePass;
 
-            await _userRepository.Post(user);
+            var result = await _userRepository.Post(user);
+            await _unitOfWork.Commit();
+
+            return new ResponseRegisteredUserJson()
+            {
+                Name = result.FullName,
+                Token = "test",
+            };
         }
 
         private async Task<string> EncodePassword(Domain.Entities.User req)
