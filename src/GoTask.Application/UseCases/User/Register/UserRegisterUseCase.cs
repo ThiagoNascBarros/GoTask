@@ -3,6 +3,7 @@ using FluentValidation.Results;
 using GoTask.Communication.Requests;
 using GoTask.Communication.Response;
 using GoTask.Domain.Data.Interface;
+using GoTask.Domain.Security.Cryptography;
 using GoTask.Exception.Exceptions;
 
 namespace GoTask.Application.UseCases.User.Register
@@ -12,20 +13,22 @@ namespace GoTask.Application.UseCases.User.Register
         private readonly IUserRepository _userRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IPasswordEncripter _encripter;
 
-        public UserRegisterUseCase(IUserRepository userRepository, IUnitOfWork unitOfWork, IMapper mapper)
+        public UserRegisterUseCase(IUserRepository userRepository, IUnitOfWork unitOfWork, IMapper mapper, IPasswordEncripter encripter)
         {
             _userRepository = userRepository;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _encripter = encripter;
         }
 
         public async Task<ResponseRegisteredUserJson> Execute(RequestRegisterUserJson request)
         {
-            Validate(request);
+            await Validate(request);
 
             var user = _mapper.Map<Domain.Entities.User>(request);
-            user.Password = await EncodePassword(user);
+            user.Password = _encripter.Encrypt(user.Password);
 
             var result = await _userRepository.Post(user);
             await _unitOfWork.Commit();
@@ -56,9 +59,6 @@ namespace GoTask.Application.UseCases.User.Register
             }
         }
 
-        private async Task<string> EncodePassword(Domain.Entities.User req)
-        {
-            return BCrypt.Net.BCrypt.HashPassword(req.Password);
-        }
+
     }
 }

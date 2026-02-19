@@ -1,4 +1,5 @@
 ﻿using GoTask.Domain.Data.Interface;
+using GoTask.Domain.Security.Cryptography;
 using GoTask.Infra.DataAcess;
 using GoTask.Infra.DataAcess.Repository;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +14,7 @@ namespace GoTask.Infra
         public static void Injection(this IServiceCollection services, IConfiguration config)
         {
             AddContext(services, config);
-            AddRepositories(services);
+            AddServices(services);
         }
 
         private static void AddContext(this IServiceCollection services, IConfiguration config)
@@ -23,10 +24,11 @@ namespace GoTask.Infra
                 options.UseMySql(stringConnection, ServerVersion.AutoDetect(stringConnection)));
         }
 
-        private static void AddRepositories(this IServiceCollection services)
+        private static void AddServices(this IServiceCollection services)
         {
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IPasswordEncripter, Security.Cryptography.BCrypt>();
         }
     }
 }
