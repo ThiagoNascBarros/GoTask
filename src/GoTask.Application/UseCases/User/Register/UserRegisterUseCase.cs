@@ -2,6 +2,7 @@
 using GoTask.Communication.Requests;
 using GoTask.Communication.Response;
 using GoTask.Domain.Data.Interface;
+using GoTask.Exception.Exceptions;
 
 namespace GoTask.Application.UseCases.User.Register
 {
@@ -20,13 +21,15 @@ namespace GoTask.Application.UseCases.User.Register
 
         public async Task<ResponseRegisteredUserJson> Execute(RequestRegisterUserJson request)
         {
-            var user = _mapper.Map<Domain.Entities.User>(request);
+            Validate(request);
 
+            var user = _mapper.Map<Domain.Entities.User>(request);
             var encodePass = await EncodePassword(user);
 
             user.Password = encodePass;
 
             var result = await _userRepository.Post(user);
+
             await _unitOfWork.Commit();
 
             return new ResponseRegisteredUserJson()
@@ -34,6 +37,20 @@ namespace GoTask.Application.UseCases.User.Register
                 Name = result.FullName,
                 Token = "test",
             };
+        }
+
+        private void Validate(RequestRegisterUserJson request)
+        {
+            var validator = new RegisterUserValidation();
+
+            var result = validator.Validate(request);
+
+            if (!result.IsValid)
+            {
+                var erroMessages = result.Errors.Select(f => f.ErrorMessage).ToList();
+
+                throw new ErrorOnValidationException(erroMessages);
+            }
         }
 
         private async Task<string> EncodePassword(Domain.Entities.User req)
