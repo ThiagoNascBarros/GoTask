@@ -2,8 +2,6 @@
 {
     public record ResponseRegisteredUserJson(string Name, string Token)
     {
-        public ResponseRegisteredUserJson() : this(string.Empty, string.Empty)
-        {
-        }
+        public ResponseRegisteredUserJson() : this(string.Empty, string.Empty) { }
     }
 }

@@ -1,4 +1,5 @@
-﻿using GoTask.Communication.Requests;
+﻿using AutoMapper;
+using GoTask.Communication.Requests;
 using GoTask.Communication.Response;
 using GoTask.Domain.Data.Interface;
 
@@ -8,21 +9,18 @@ namespace GoTask.Application.UseCases.User.Register
     {
         private readonly IUserRepository _userRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public UserRegisterUseCase(IUserRepository userRepository, IUnitOfWork unitOfWork)
+        public UserRegisterUseCase(IUserRepository userRepository, IUnitOfWork unitOfWork, IMapper mapper)
         {
             _userRepository = userRepository;
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         public async Task<ResponseRegisteredUserJson> Execute(RequestRegisterUserJson request)
         {
-            var user = new Domain.Entities.User
-            {
-                FullName = request.FullName,
-                Email = request.Email,
-                Password = request.Password
-            };
+            var user = _mapper.Map<Domain.Entities.User>(request);
 
             var encodePass = await EncodePassword(user);
 
