@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation.Results;
 using GoTask.Communication.Requests;
 using GoTask.Communication.Response;
 using GoTask.Domain.Data.Interface;
@@ -24,13 +25,11 @@ namespace GoTask.Application.UseCases.User.Register
             Validate(request);
 
             var user = _mapper.Map<Domain.Entities.User>(request);
-            var encodePass = await EncodePassword(user);
-
-            user.Password = encodePass;
+            user.Password = await EncodePassword(user);
 
             var result = await _userRepository.Post(user);
-
             await _unitOfWork.Commit();
+
 
             return new ResponseRegisteredUserJson()
             {
@@ -39,11 +38,15 @@ namespace GoTask.Application.UseCases.User.Register
             };
         }
 
-        private void Validate(RequestRegisterUserJson request)
+        private async Task Validate(RequestRegisterUserJson request)
         {
-            var validator = new RegisterUserValidation();
+            var result = new RegisterUserValidation().Validate(request);
 
-            var result = validator.Validate(request);
+            var emailExists = await _userRepository.ExistsUserWithEmail(request.Email);
+            if (emailExists)
+            {
+                result.Errors.Add(new ValidationFailure(string.Empty, "Este email já está registrado."));
+            }
 
             if (!result.IsValid)
             {
