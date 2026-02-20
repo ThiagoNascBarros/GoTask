@@ -4,6 +4,7 @@ using GoTask.Communication.Requests;
 using GoTask.Communication.Response;
 using GoTask.Domain.Data.Interface;
 using GoTask.Domain.Security.Cryptography;
+using GoTask.Domain.Security.Token;
 using GoTask.Exception.Exceptions;
 
 namespace GoTask.Application.UseCases.User.Register
@@ -14,13 +15,15 @@ namespace GoTask.Application.UseCases.User.Register
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly IPasswordEncripter _encripter;
+        private readonly IAccessTokenGenerator _accessToken;
 
-        public UserRegisterUseCase(IUserRepository userRepository, IUnitOfWork unitOfWork, IMapper mapper, IPasswordEncripter encripter)
+        public UserRegisterUseCase(IUserRepository userRepository, IUnitOfWork unitOfWork, IMapper mapper, IPasswordEncripter encripter, IAccessTokenGenerator accessToken)
         {
             _userRepository = userRepository;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _encripter = encripter;
+            _accessToken = accessToken;
         }
 
         public async Task<ResponseRegisteredUserJson> Execute(RequestRegisterUserJson request)
@@ -30,14 +33,14 @@ namespace GoTask.Application.UseCases.User.Register
             var user = _mapper.Map<Domain.Entities.User>(request);
             user.Password = _encripter.Encrypt(user.Password);
 
-            var result = await _userRepository.Post(user);
+            await _userRepository.Post(user);
             await _unitOfWork.Commit();
 
 
             return new ResponseRegisteredUserJson()
             {
-                Name = result.FullName,
-                Token = "test",
+                Name = user.FullName,
+                Token = this._accessToken.Generate(user),
             };
         }
 

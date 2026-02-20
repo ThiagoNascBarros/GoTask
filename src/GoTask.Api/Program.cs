@@ -15,6 +15,21 @@ builder.Services.AddHealthChecks();
 builder.Services.Injection(builder.Configuration);
 builder.Services.AddUseCases();
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionGlobalFilter)));
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy(name: "AllowAllOrigins",
+//        configurePolicy: policy =>
+//        {
+//            policy.AllowAnyOrigin()
+//                .AllowAnyHeader()
+//                .AllowAnyMethod();
+//        });
+//    options.AddPolicy(name: "AllowOnlySomeOrigins",
+//        configurePolicy: policy =>
+//        {
+//            policy.WithOrigins("http://localhost:4200/");
+//        });
+//});
 
 var app = builder.Build();
 
@@ -26,6 +41,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapHealthChecks("/health");
+
+app.UseCors(configurePolicy: policy =>
+{
+    policy.WithOrigins("http://localhost:4200/");
+});
 
 app.UseHttpsRedirection();
 
