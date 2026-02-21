@@ -30,7 +30,7 @@ namespace GoTask.Infra.Security.Token
             {
                 Expires = DateTime.UtcNow.AddMinutes(60),
                 SigningCredentials = new SigningCredentials(SecurityKey(), SecurityAlgorithms.HmacSha256Signature),
-                Subject = new ClaimsIdentity(claims)
+                Subject = new ClaimsIdentity(claims),
             };
 
             var tokenHandler = new JwtSecurityTokenHandler();
