@@ -1,0 +1,54 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoTask.Api", "GoTask.Api\GoTask.Api.csproj", "{5474A0BE-CD00-5B56-530A-FDCE07C3681B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoTask.Application", "GoTask.Application\GoTask.Application.csproj", "{DAD8AAD2-3BB4-7BAC-7B99-9AFA45CF8E79}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoTask.Communication", "GoTask.Communication\GoTask.Communication.csproj", "{639BB557-72C4-4B97-D766-7678BADAF74D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoTask.Domain", "GoTask.Domain\GoTask.Domain.csproj", "{3FA586DD-370B-D6E8-9760-B8C1DAB28230}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoTask.Exception", "GoTask.Exception\GoTask.Exception.csproj", "{DFD11903-2B63-9D24-C41F-5F0AAA93ABB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoTask.Infra", "GoTask.Infra\GoTask.Infra.csproj", "{7D4EBCFB-16DB-707A-FD5E-7B6D1A428677}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5474A0BE-CD00-5B56-530A-FDCE07C3681B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5474A0BE-CD00-5B56-530A-FDCE07C3681B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5474A0BE-CD00-5B56-530A-FDCE07C3681B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5474A0BE-CD00-5B56-530A-FDCE07C3681B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAD8AAD2-3BB4-7BAC-7B99-9AFA45CF8E79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAD8AAD2-3BB4-7BAC-7B99-9AFA45CF8E79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAD8AAD2-3BB4-7BAC-7B99-9AFA45CF8E79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAD8AAD2-3BB4-7BAC-7B99-9AFA45CF8E79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{639BB557-72C4-4B97-D766-7678BADAF74D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{639BB557-72C4-4B97-D766-7678BADAF74D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{639BB557-72C4-4B97-D766-7678BADAF74D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{639BB557-72C4-4B97-D766-7678BADAF74D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FA586DD-370B-D6E8-9760-B8C1DAB28230}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FA586DD-370B-D6E8-9760-B8C1DAB28230}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FA586DD-370B-D6E8-9760-B8C1DAB28230}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FA586DD-370B-D6E8-9760-B8C1DAB28230}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFD11903-2B63-9D24-C41F-5F0AAA93ABB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFD11903-2B63-9D24-C41F-5F0AAA93ABB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFD11903-2B63-9D24-C41F-5F0AAA93ABB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFD11903-2B63-9D24-C41F-5F0AAA93ABB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D4EBCFB-16DB-707A-FD5E-7B6D1A428677}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D4EBCFB-16DB-707A-FD5E-7B6D1A428677}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D4EBCFB-16DB-707A-FD5E-7B6D1A428677}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D4EBCFB-16DB-707A-FD5E-7B6D1A428677}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6A20187A-04B6-4363-925E-B12A7472C482}
+	EndGlobalSection
+EndGlobal
