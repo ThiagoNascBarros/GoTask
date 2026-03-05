@@ -1,4 +1,5 @@
 ﻿using GoTask.Application.Mapper;
+using GoTask.Application.UseCases.User.Login;
 using GoTask.Application.UseCases.User.Register;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -21,6 +22,7 @@ namespace GoTask.Application
         private static void AddUses(this IServiceCollection services)
         {
             services.AddScoped<IUserRegisterUseCase, UserRegisterUseCase>();
+            services.AddScoped<IUserLoginUseCase, UserLoginUseCase>();
         }
 
     }

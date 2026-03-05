@@ -14,6 +14,13 @@ namespace GoTask.Infra.DataAcess.Repository
             return await _dbContext.User.AnyAsync(x => x.Email.Equals(email));
         }
 
+        public async Task<User?> GetUserByEmailAndPassword(string email)
+        {
+            return await _dbContext.User
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Email.Equals(email));
+        }
+
         public async Task<User> Post(User user)
         {
             var userAdd = await _dbContext.User.AddAsync(user);

@@ -1,7 +1,10 @@
+using System.Text;
 using GoTask.Api.Filter;
 using GoTask.Application;
 using GoTask.Infra;
 using GoTask.Infra.Migrations;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,23 +16,26 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHealthChecks();
 builder.Services.Injection(builder.Configuration);
+
+var signinKey = builder.Configuration.GetValue<string>("Settings:Jwt:SignInKey");
+// Config of authorization in web api
+builder.Services.AddAuthentication(config =>
+{
+    config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    config.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(config =>
+{
+    config.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ClockSkew = new TimeSpan(0),
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(signinKey!))
+    };
+});
+
 builder.Services.AddUseCases();
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionGlobalFilter)));
-//builder.Services.AddCors(options =>
-//{
-//    options.AddPolicy(name: "AllowAllOrigins",
-//        configurePolicy: policy =>
-//        {
-//            policy.AllowAnyOrigin()
-//                .AllowAnyHeader()
-//                .AllowAnyMethod();
-//        });
-//    options.AddPolicy(name: "AllowOnlySomeOrigins",
-//        configurePolicy: policy =>
-//        {
-//            policy.WithOrigins("http://localhost:4200/");
-//        });
-//});
 
 var app = builder.Build();
 
@@ -49,6 +55,7 @@ app.UseCors(configurePolicy: policy =>
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

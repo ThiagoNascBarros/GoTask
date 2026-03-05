@@ -6,5 +6,6 @@ namespace GoTask.Domain.Data.Interface
     {
         Task<User> Post(User user);
         Task<bool> ExistsUserWithEmail(string email);
+        Task<Entities.User?> GetUserByEmailAndPassword(string email);
     }
 }

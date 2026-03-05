@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Update="ResourceErroMessages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ResourceErroMessages.resx</DependentUpon>
+    </Compile>
     <Compile Update="ResponseErroJson.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -15,6 +20,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="ResourceErroMessages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResourceErroMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="ResponseErroJson.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ResponseErroJson.Designer.cs</LastGenOutput>

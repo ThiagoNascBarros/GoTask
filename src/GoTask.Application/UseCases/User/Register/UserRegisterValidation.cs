@@ -4,9 +4,9 @@ using System.Text.RegularExpressions;
 
 namespace GoTask.Application.UseCases.User.Register
 {
-    public class RegisterUserValidation : AbstractValidator<RequestRegisterUserJson>
+    public class UserRegisterValidation : AbstractValidator<RequestRegisterUserJson>
     {
-        public RegisterUserValidation()
+        public UserRegisterValidation()
         {
             RuleFor(x => x.FullName).NotEmpty().WithMessage("Nome não pode estar em branco");
             RuleFor(x => x.Email).EmailAddress().WithMessage("Email não é valido");

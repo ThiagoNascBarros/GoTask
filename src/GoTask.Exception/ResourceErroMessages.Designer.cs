@@ -61,6 +61,15 @@ namespace GoTask.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid email or password.
+        /// </summary>
+        public static string INVALID_LOGIN_ERROR {
+            get {
+                return ResourceManager.GetString("INVALID_LOGIN_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unknow Error.
         /// </summary>
         public static string UNKNOWN_ERROR {

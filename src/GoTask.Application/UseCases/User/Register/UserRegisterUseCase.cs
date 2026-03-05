@@ -46,7 +46,7 @@ namespace GoTask.Application.UseCases.User.Register
 
         private async Task Validate(RequestRegisterUserJson request)
         {
-            var result = new RegisterUserValidation().Validate(request);
+            var result = new UserRegisterValidation().Validate(request);
 
             var emailExists = await _userRepository.ExistsUserWithEmail(request.Email);
             if (emailExists)
