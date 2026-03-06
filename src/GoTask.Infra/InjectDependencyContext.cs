@@ -30,6 +30,7 @@ namespace GoTask.Infra
         private static void AddServices(this IServiceCollection services)
         {
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ITaskRepository, TaskRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IPasswordEncripter, Security.Cryptography.BCrypt>();
         }

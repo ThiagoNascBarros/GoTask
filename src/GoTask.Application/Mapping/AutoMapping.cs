@@ -16,10 +16,13 @@ namespace GoTask.Application.Mapper
         private void RequestToEntity()
         {
             CreateMap<RequestRegisterUserJson, User>();
+            CreateMap<RequestRegisterTaskJson, Tasks>();
         }
 
         private void EntityToResponse()
         {
+            CreateMap<Tasks, ResponseRegisterTaskJson>();
+            CreateMap<GoTask.Domain.Entities.Tasks, ResponseRegisterTaskJson>();
             CreateMap<User, ResponseRegisteredUserJson>();
         }
     }
