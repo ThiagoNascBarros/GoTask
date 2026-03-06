@@ -28,7 +28,7 @@ namespace GoTask.Infra.Security.Token
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Expires = DateTime.UtcNow.AddMinutes(60),
+                Expires = DateTime.UtcNow.AddHours(4).AddMinutes(30),
                 SigningCredentials = new SigningCredentials(SecurityKey(), SecurityAlgorithms.HmacSha256Signature),
                 Subject = new ClaimsIdentity(claims),
             };
