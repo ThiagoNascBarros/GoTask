@@ -8,6 +8,7 @@ namespace GoTask.Api.Filter
 {
     public class ExceptionGlobalFilter : IExceptionFilter
     {
+        
         public void OnException(ExceptionContext context)
         {
             if (context.Exception is GoTaskException)

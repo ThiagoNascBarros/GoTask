@@ -1,5 +1,6 @@
 ﻿using GoTask.Application.Mapper;
 using GoTask.Application.UseCases.Tasks.Register;
+using GoTask.Application.UseCases.Tasks.GetAll;
 using GoTask.Application.UseCases.User.Login;
 using GoTask.Application.UseCases.User.Register;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,6 +26,8 @@ namespace GoTask.Application
             services.AddScoped<IUserRegisterUseCase, UserRegisterUseCase>();
             services.AddScoped<IUserLoginUseCase, UserLoginUseCase>();
             services.AddScoped<ITaskRegisterUseCase, TaskRegisterUseCase>();
+            services.AddScoped<ITaskGetAllUseCase, TaskGetAllUseCase>();
+
         }
 
     }

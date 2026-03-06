@@ -6,7 +6,6 @@ namespace GoTask.Application.UseCases.Tasks.GetAll;
 
 internal class TaskGetAllUseCase : ITaskGetAllUseCase
 {
-    
     private readonly ITaskRepository _repository;
     private readonly IMapper _mapper;
 
@@ -19,6 +18,13 @@ internal class TaskGetAllUseCase : ITaskGetAllUseCase
     public async Task<IEnumerable<ResponseRegisterTaskJson>> Execute()
     {
         var tasks = await _repository.GetAllAsync();
-        return _mapper.Map<IEnumerable<ResponseRegisterTaskJson>>(tasks);
+        var dto = tasks.Select(t => new ResponseRegisterTaskJson
+        (
+            t.Title,
+            t.Description,
+            t.Status
+        ));
+
+        return dto;
     }
 }
