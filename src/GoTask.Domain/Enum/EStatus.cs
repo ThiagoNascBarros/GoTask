@@ -1,9 +1,14 @@
-﻿namespace GoTask.Domain.Enum
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace GoTask.Domain.Enum
 {
-    public class EStatus
+    public enum EStatus
     {
-        public const string DONE = "Feito";
-        public const string IN_PROGRESS = "Em progresso";
-        public const string TO_DO = "A fazer";
+        [Display(Name = "To do")]
+        ToDo = 0,
+        [Display(Name = "In progress")]
+        InProgress = 1,
+        [Display(Name = "Done")]
+        Done = 2,
     }
 }

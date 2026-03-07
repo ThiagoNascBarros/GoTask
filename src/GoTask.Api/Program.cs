@@ -1,4 +1,5 @@
 using System.Text;
+using System.Text.Json.Serialization;
 using GoTask.Api.Filter;
 using GoTask.Application;
 using GoTask.Infra;
@@ -53,6 +54,10 @@ builder.Services.AddScoped<ExceptionGlobalFilter>();
 builder.Services.AddControllers(options =>
 {
     options.Filters.Add<ExceptionGlobalFilter>();
+}).AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.Converters
+        .Add(new JsonStringEnumConverter());
 });
 
 var signinKey = builder.Configuration.GetValue<string>("Settings:Jwt:SignInKey");
