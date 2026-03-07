@@ -8,9 +8,12 @@ internal class TaskRepository(GoTaskDbContext dbContext) : ITaskRepository
 {
     private readonly GoTaskDbContext _dbContext = dbContext;
 
-    public async Task<IEnumerable<Tasks>> GetAllAsync()
+    public async Task<IEnumerable<Tasks>> GetAllAsync(User user)
     {
-        return await _dbContext.Tasks.ToListAsync();
+        return await _dbContext.Tasks
+            .AsNoTracking()
+            .Where(t => t.User.UserIdentify == user.UserIdentify)
+            .ToListAsync();
     }
 
     public async Task CreateTaskAsync(Tasks task)

@@ -4,6 +4,6 @@ namespace GoTask.Domain.Data.Interface;
 
 public interface ITaskRepository
 {
-    Task<IEnumerable<Tasks>> GetAllAsync();
+    Task<IEnumerable<Tasks>> GetAllAsync(User user);
     Task CreateTaskAsync(Tasks task);
 }

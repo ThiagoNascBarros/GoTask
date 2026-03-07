@@ -8,6 +8,12 @@ namespace GoTask.Api.Filter
 {
     public class ExceptionGlobalFilter : IExceptionFilter
     {
+        private readonly ILogger<ExceptionGlobalFilter> _logger;
+        
+        public ExceptionGlobalFilter(ILogger<ExceptionGlobalFilter> logger)
+        {
+            _logger = logger;
+        }
         
         public void OnException(ExceptionContext context)
         {
@@ -25,6 +31,7 @@ namespace GoTask.Api.Filter
         {
             var e = (GoTaskException)context.Exception;
             var erroResponse = new ResponseErroJson(e.GetErrors());
+            _logger.LogError(context.Exception, "Erro inesperado ocorreu");
 
             context.HttpContext.Response.StatusCode = e.StatusCode;
             context.Result = new ObjectResult(erroResponse);
@@ -34,6 +41,7 @@ namespace GoTask.Api.Filter
         {
             // Utilizando Resouce para centralizar as mensagens de erro
             var erroResponse = new ResponseErroJson(ResourceErroMessages.UNKNOWN_ERROR);
+            _logger.LogError(context.Exception, "Erro inesperado ocorreu");
             context.HttpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
             context.Result = new ObjectResult(erroResponse);
         }

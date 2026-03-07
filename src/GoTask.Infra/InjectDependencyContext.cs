@@ -31,6 +31,7 @@ namespace GoTask.Infra
         {
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ITaskRepository, TaskRepository>();
+            services.AddScoped<IAuthDecode, AuthDecode>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IPasswordEncripter, Security.Cryptography.BCrypt>();
         }
