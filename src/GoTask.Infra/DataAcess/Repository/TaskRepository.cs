@@ -26,4 +26,11 @@ internal class TaskRepository(GoTaskDbContext dbContext) : ITaskRepository
         return await _dbContext.Tasks
             .FirstOrDefaultAsync(t => EF.Functions.Like(t.Title, requestTitle));
     }
+
+    public async Task<Tasks?> GetByIdAsync(long id)
+    {
+        return await _dbContext.Tasks
+            .AsNoTracking()
+            .FirstOrDefaultAsync(t => t.Id == id); 
+    }
 }

@@ -20,14 +20,15 @@ internal class TaskGetAllUseCase : ITaskGetAllUseCase
     public async Task<IEnumerable<ResponseGetAllTaskJson>> Execute(Domain.Entities.User user)
     {
         var tasks = await _repository.GetAllAsync(user);
-        var dto = tasks.Select(t => new ResponseGetAllTaskJson(t.Title, t.Description, t.Status));
+        var dto = tasks.Select(t => new ResponseGetAllTaskJson(t.Id, t.Title, t.Description, t.Status));
 
         return dto;
     }
 }
 
-public class ResponseGetAllTaskJson(string Title, string Description, EStatus Status)
+public class ResponseGetAllTaskJson(long Id, string Title, string Description, EStatus Status)
 {
+    public long Id { get; set; } = Id;
     public string? Title { get; set; } = Title;
     public string? Description { get; set; } = Description;
     public EStatus Status { get; set; } = Status;

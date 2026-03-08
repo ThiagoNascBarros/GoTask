@@ -6,5 +6,5 @@ namespace GoTask.Application.UseCases.Tasks.Update;
 
 public interface ITaskUpdateUseCase
 {
-    Task<ResponseUpdateTaskJson> Execute(RequestUpdateTaskJson request);
+    Task<ResponseUpdateTaskJson> Execute(long id, RequestUpdateTaskJson request);
 }

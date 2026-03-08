@@ -19,19 +19,16 @@ public class TaskUpdateUseCase : ITaskUpdateUseCase
         _mapper = mapper;
     }
     
-    public async Task<ResponseUpdateTaskJson> Execute(RequestUpdateTaskJson request)
+    public async Task<ResponseUpdateTaskJson> Execute(long id, RequestUpdateTaskJson request)
     {
-        var task = _taskRepository.GetAsync(request.Title);
-        
-        task.Result.Update(new Domain.Entities.Tasks
-        {
-            Title = request.Title,
-            Description = request.Description,
-            Status = request.Status
-        });
+        var task = await _taskRepository.GetByIdAsync(id);
+        var updateEntity = _mapper.Map<Domain.Entities.Tasks>(request);   
+
+        task.Update(updateEntity);
 
         await _unitOfWork.Commit();
 
-        return _mapper.Map<ResponseUpdateTaskJson>(task.Result);
+        return _mapper.Map<ResponseUpdateTaskJson>(task);
     }
+    
 }

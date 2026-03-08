@@ -44,10 +44,11 @@ namespace GoTask.Api.Controllers
         [HttpPut]
         [ProducesResponseType(typeof(ResponseUpdateTaskJson), StatusCodes.Status200OK)]
         public async Task<IActionResult> Update(
+            [FromQuery] long id,
             [FromServices] ITaskUpdateUseCase useCase,
             [FromBody] RequestUpdateTaskJson request)
         {
-            var response = await useCase.Execute(request);
+            var response = await useCase.Execute(id, request);
             return Ok(response);
         }
 

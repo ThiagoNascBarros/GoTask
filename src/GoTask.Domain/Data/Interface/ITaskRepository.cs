@@ -7,4 +7,5 @@ public interface ITaskRepository
     Task<IEnumerable<Tasks>> GetAllAsync(User user);
     Task CreateTaskAsync(Tasks task);
     Task<Tasks> GetAsync(string requestTitle);
+    Task<Tasks> GetByIdAsync(long id);
 }
