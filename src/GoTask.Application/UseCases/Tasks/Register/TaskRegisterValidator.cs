@@ -9,6 +9,12 @@ public class TaskRegisterValidator : AbstractValidator<RequestRegisterTaskJson>
     {
         RuleFor(x => x.Status)
             .IsInEnum()
-            .WithMessage("Status is invalid");
+            .WithMessage("Status está invalido");
+        RuleFor(x => x.Title)
+            .NotEmpty()
+            .WithMessage("Título é obrigatório");
+        RuleFor(x => x.Description)
+            .NotEmpty()
+            .WithMessage("Descrição é obrigatória");
     }
 }
