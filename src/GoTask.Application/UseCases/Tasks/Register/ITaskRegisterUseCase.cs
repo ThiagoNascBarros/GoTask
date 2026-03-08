@@ -5,5 +5,5 @@ namespace GoTask.Application.UseCases.Tasks.Register;
 
 public interface ITaskRegisterUseCase
 {
-    Task<ResponseRegisterTaskJson> Execute(RequestRegisterTaskJson request);
+    Task<ResponseRegisterTaskJson> Execute(RequestRegisterTaskJson request, Domain.Entities.User user);
 }

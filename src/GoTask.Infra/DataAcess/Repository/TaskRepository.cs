@@ -20,4 +20,10 @@ internal class TaskRepository(GoTaskDbContext dbContext) : ITaskRepository
     {
         await _dbContext.Tasks.AddAsync(task);
     }
+
+    public async Task<Tasks?> GetAsync(string requestTitle)
+    {
+        return await _dbContext.Tasks
+            .FirstOrDefaultAsync(t => EF.Functions.Like(t.Title, requestTitle));
+    }
 }

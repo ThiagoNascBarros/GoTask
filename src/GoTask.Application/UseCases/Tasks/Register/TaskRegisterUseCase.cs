@@ -19,9 +19,10 @@ internal class TaskRegisterUseCase : ITaskRegisterUseCase
         _mapper = mapper;
     }
 
-    public async Task<ResponseRegisterTaskJson> Execute(RequestRegisterTaskJson request)
+    public async Task<ResponseRegisterTaskJson> Execute(RequestRegisterTaskJson request, Domain.Entities.User user)
     {
         var entity = _mapper.Map<Domain.Entities.Tasks>(request);
+        entity.UserId = user.Id;
         
         await _taskRepository.CreateTaskAsync(entity);
         await _unitOfWork.Commit();

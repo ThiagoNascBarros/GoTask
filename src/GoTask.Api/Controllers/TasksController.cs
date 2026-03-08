@@ -1,5 +1,6 @@
 using GoTask.Application.UseCases.Tasks.GetAll;
 using GoTask.Application.UseCases.Tasks.Register;
+using GoTask.Application.UseCases.Tasks.Update;
 using GoTask.Communication.Requests;
 using GoTask.Communication.Response;
 using GoTask.Domain.Security.Token;
@@ -19,9 +20,11 @@ namespace GoTask.Api.Controllers
         [ProducesResponseType(typeof(ResponseErroJson), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Create(
             [FromServices] ITaskRegisterUseCase useCase,
+            [FromServices] IAuthDecode _decode,
             [FromBody] RequestRegisterTaskJson request)
         {
-            var response = await useCase.Execute(request);
+            var user = await _decode.DecodeTokenToUser();
+            var response = await useCase.Execute(request, user);
             return Created(string.Empty, response);
         }
 
@@ -38,5 +41,15 @@ namespace GoTask.Api.Controllers
             return Ok(response);
         }
         
+        [HttpPut]
+        [ProducesResponseType(typeof(ResponseUpdateTaskJson), StatusCodes.Status200OK)]
+        public async Task<IActionResult> Update(
+            [FromServices] ITaskUpdateUseCase useCase,
+            [FromBody] RequestUpdateTaskJson request)
+        {
+            var response = await useCase.Execute(request);
+            return Ok(response);
+        }
+
     }
 }

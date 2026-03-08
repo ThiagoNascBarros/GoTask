@@ -4,10 +4,9 @@ using GoTask.Domain.Enum;
 
 namespace GoTask.Communication.Requests;
 
-public class RequestRegisterTaskJson(string Title, string Description, EStatus Status, long UserId)
+public class RequestRegisterTaskJson(string Title, string Description, EStatus Status)
 {
     public string Title { get; init; } = Title;
     public string Description { get; init; } = Description;
     public EStatus Status { get; init; } = Status;
-    public long UserId { get; init; } = UserId;
 }
