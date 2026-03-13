@@ -5,6 +5,7 @@ using GoTask.Application.UseCases.User.Login;
 using GoTask.Application.UseCases.User.Register;
 using Microsoft.Extensions.DependencyInjection;
 using GoTask.Application.UseCases.Tasks.Update;
+using GoTask.Application.UseCases.Tasks.Delete;
 
 namespace GoTask.Application
 {
@@ -28,6 +29,7 @@ namespace GoTask.Application
             services.AddScoped<IUserLoginUseCase, UserLoginUseCase>();
             services.AddScoped<ITaskRegisterUseCase, TaskRegisterUseCase>();
             services.AddScoped<ITaskGetAllUseCase, TaskGetAllUseCase>();
+            services.AddScoped<ITaskDeleteUseCase, TaskDeleteUseCase>();
             services.AddScoped<ITaskUpdateUseCase, TaskUpdateUseCase>();
         }
 

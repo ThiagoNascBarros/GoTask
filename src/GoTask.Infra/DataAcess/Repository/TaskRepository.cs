@@ -30,7 +30,24 @@ internal class TaskRepository(GoTaskDbContext dbContext) : ITaskRepository
     public async Task<Tasks?> GetByIdAsync(long id)
     {
         return await _dbContext.Tasks
-            .AsNoTracking()
             .FirstOrDefaultAsync(t => t.Id == id); 
+    }
+
+    public void Update(Tasks task)
+    {
+        _dbContext.Tasks.Update(task);
+    }
+
+    public async Task<Tasks> Delete(long id)
+    {
+        var task = await GetByIdAsync(id);
+        if (task is null)
+        {
+            throw new ArgumentException("Nenhuma tarefa foi encontrada");
+        }
+
+        _dbContext.Tasks.Remove(task);
+
+        return task;
     }
 }

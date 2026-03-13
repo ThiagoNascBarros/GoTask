@@ -8,4 +8,6 @@ public interface ITaskRepository
     Task CreateTaskAsync(Tasks task);
     Task<Tasks> GetAsync(string requestTitle);
     Task<Tasks> GetByIdAsync(long id);
+    void Update(Tasks task);
+    Task<Tasks> Delete(long id);
 }

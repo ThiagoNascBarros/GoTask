@@ -1,3 +1,4 @@
+using GoTask.Application.UseCases.Tasks.Delete;
 using GoTask.Application.UseCases.Tasks.GetAll;
 using GoTask.Application.UseCases.Tasks.Register;
 using GoTask.Application.UseCases.Tasks.Update;
@@ -40,7 +41,7 @@ namespace GoTask.Api.Controllers
             var response = await useCase.Execute(user);
             return Ok(response);
         }
-        
+
         [HttpPut]
         [ProducesResponseType(typeof(ResponseUpdateTaskJson), StatusCodes.Status200OK)]
         public async Task<IActionResult> Update(
@@ -52,5 +53,19 @@ namespace GoTask.Api.Controllers
             return Ok(response);
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromServices] ITaskDeleteUseCase useCase, long id)
+        {
+            await useCase.Execute(id);
+            return Ok(new Message("Task deleted"));
+        }
     }
 }
+
+internal record Message(string message);
+
+/*
+ {
+  "token": ""
+}
+ */

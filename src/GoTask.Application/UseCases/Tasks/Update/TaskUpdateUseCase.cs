@@ -22,9 +22,16 @@ public class TaskUpdateUseCase : ITaskUpdateUseCase
     public async Task<ResponseUpdateTaskJson> Execute(long id, RequestUpdateTaskJson request)
     {
         var task = await _taskRepository.GetByIdAsync(id);
-        var updateEntity = _mapper.Map<Domain.Entities.Tasks>(request);   
+        var updateEntity = new Domain.Entities.Tasks
+        {
+            Id = id,
+            Title = request.Title,
+            Description = request.Description,
+            Status = request.Status
+        };   
 
         task.Update(updateEntity);
+        _taskRepository.Update(task);
 
         await _unitOfWork.Commit();
 
